@@ -16,7 +16,7 @@ Yüksek kullanılabilirlik ve otomatik yük dengeleme ile dağıtılmış sistem
 - **Composite Scoring**: CPU (70%) + Latency (30%) kombinasyonu
 - **Redirect Loop Koruması**: X-Redirect-Count header ile sonsuz döngü engelle
 - **Load Testing**: Async ve thread tabanlı test araçları
-- **CI/CD Entegrasyonu**: GitHub Actions workflow
+
 
 ### 📋 Gereksinimler
 
@@ -60,9 +60,6 @@ python3 src/load_test.py --mode thread --rate 50
 
 ```
 DiNC/
-├── .github/
-│   └── workflows/
-│       └── test.yml              # GitHub Actions CI/CD
 ├── src/
 │   ├── registry_server/
 │   │   └── main.go              # Go merkezi registry (port 8000)
@@ -217,7 +214,6 @@ A distributed system architecture with high availability and automatic load bala
 - **Composite Scoring**: CPU (70%) + Latency (30%) combination
 - **Redirect Loop Protection**: Prevent infinite redirects with X-Redirect-Count header
 - **Load Testing**: Async and thread-based test tools
-- **CI/CD Integration**: GitHub Actions workflow
 
 ### 📋 Requirements
 
@@ -261,9 +257,6 @@ python3 src/load_test.py --mode thread --rate 50
 
 ```
 DiNC/
-├── .github/
-│   └── workflows/
-│       └── test.yml              # GitHub Actions CI/CD
 ├── src/
 │   ├── registry_server/
 │   │   └── main.go              # Go central registry (port 8000)
