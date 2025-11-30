@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="10">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Status - {{my_addr}}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>DiNC Node</h1>
+            <p>Adres: <strong>{{my_addr}}</strong></p>
+        </header>
+        <main>
+            <div class="card">
+                <h2>Kendi Durumum</h2>
+                <div class="status-indicator">
+                    {% if is_overloaded %}
+                    <span style="background-color: #ff6b6b; box-shadow: 0 0 8px #ff6b6b;"></span> <strong style="color: #ff6b6b;">AŞIRI YÜKLÜ</strong>
+                    {% else %}
+                    <span></span> Aktif
+                    {% endif %}
+                </div>
+                <p>Anlık CPU Yükü: <strong>{{ "%.2f" | format(my_load) }}%</strong></p>
+                {% if is_overloaded %}
+                <p style="color: #ff6b6b; margin-top: 0.5rem;">⚠️ CPU %{{ threshold }} eşiğinin üzerinde! İstekler diğer node'lara yönlendiriliyoruz.</p>
+                {% endif %}
+            </div>
+            
+            {% if best_peer %}
+            <div class="card">
+                <h2>En İyi Peer</h2>
+                <p>
+                    <strong>Adres:</strong> <a href="{{ best_peer.address }}/" target="_blank">{{ best_peer.address }}</a>
+                </p>
+                <p><strong>CPU Yükü:</strong> {{ "%.2f" | format(best_peer.load) }}%</p>
+                <p><strong>Gecikme:</strong> {{ "%.2f" | format(best_peer.latency) }} ms</p>
+                <p><strong>Sağlık Skoru:</strong> {{ "%.2f" | format(best_peer.score) }}</p>
+                <p style="margin-top: 1rem;">
+                    <a href="/redirect" class="btn" style="display: inline-block; padding: 0.5rem 1rem; background-color: var(--cf-orange); color: white; text-decoration: none; border-radius: 5px;">
+                        Bu Peer'a Yönlendir →
+                    </a>
+                </p>
+            </div>
+            {% endif %}
+            
+            <div class="card">
+                <h2>Keşfedilen Diğer Sunucular (Peers)</h2>
+                {% if peers %}
+                    <ul class="peer-list">
+                        {% for peer in peers %}
+                        <li>
+                            <a href="{{ peer.address }}" target="_blank">{{ peer.address }}</a>
+                            <div style="font-size: 0.85rem; color: var(--cf-text-secondary);">
+                                CPU: {{ "%.2f" | format(peer.load) }}% | 
+                                Gecikme: {{ "%.2f" | format(peer.latency) }} ms | 
+                                Skor: {{ "%.2f" | format(peer.score) }}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Henüz başka bir sunucu keşfedilmedi.</p>
+                {% endif %}
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2025 DiNC Projesi.</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.egg-info/
+
+# Build artifacts
+build/
+dist/
+*.egg
+
+# Veritabanı ve veri dosyaları
+*.sqlite3
+*.db
+*.json
+
+# IDE ve OS dosyaları
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+
+# Diğer
+ignore/
+temp/
+tmp/

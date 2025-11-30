@@ -1,0 +1,156 @@
+/* Genel Stil ve Cloudflare Renk Paleti */
+:root {
+    --cf-dark-blue: #0c112b;
+    --cf-blue: #3462ff;
+    --cf-orange: #f38020;
+    --cf-text-primary: #e0e1e6;
+    --cf-text-secondary: #9fa1a8;
+    --cf-border-color: #2d324d;
+    --cf-card-bg: #1a2035;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--cf-dark-blue);
+    color: var(--cf-text-primary);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    font-size: 3rem;
+    color: var(--cf-orange);
+    margin: 0;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: var(--cf-text-secondary);
+}
+
+/* Kartlar */
+.card {
+    background-color: var(--cf-card-bg);
+    border: 1px solid var(--cf-border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+    margin-top: 0;
+    color: var(--cf-text-primary);
+    border-bottom: 1px solid var(--cf-border-color);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+/* Durum Göstergesi */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.status-indicator span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #4caf50; /* Yeşil */
+    border-radius: 50%;
+    margin-right: 0.75rem;
+    box-shadow: 0 0 8px #4caf50;
+}
+
+/* Eylem Butonları */
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+button {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--cf-blue);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #274fcc;
+}
+
+button:focus-visible {
+    outline: 2px solid var(--cf-orange);
+    outline-offset: 2px;
+}
+
+button.secondary {
+    background-color: transparent;
+    border: 1px solid var(--cf-border-color);
+    color: var(--cf-text-secondary);
+}
+
+button.secondary:hover {
+    background-color: var(--cf-border-color);
+    color: var(--cf-text-primary);
+}
+
+#response-message {
+    margin-top: 1rem;
+    color: var(--cf-text-secondary);
+    min-height: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--cf-text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Mobil Cihazlar İçin */
+@media (max-width: 600px) {
+    .container {
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+}
