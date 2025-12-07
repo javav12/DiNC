@@ -1,6 +1,6 @@
 # DiNC - Distributed Node Coordinator
 
-[🇹🇷 Türkçe](#türkçe) | [🇬🇧 English](#english)
+[🇹🇷 Türkçe](#türkçe) | [🇬🇧 English](#english) | [📖 Wiki](https://github.com/javav12/DiNC/wiki)
 
 ---
 

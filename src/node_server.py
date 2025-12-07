@@ -1,6 +1,7 @@
 """
 src/node_server.py - Yan sunucu (Node).
 Merkezi sunucuya kendisini kaydeder, diğer sunucuları keşfeder ve yönlendirir.
+Registry düştüğünde A_M_R (Attack Mode Request) P2P ağına geçer.
 """
 from flask import Flask, render_template, jsonify, redirect, request
 import psutil
@@ -11,7 +12,7 @@ import argparse
 
 # Proje modüllerini içe aktar
 sys.path.insert(0, "/home/javav12/Belgeler/DiNC/src")
-from utils import State, Heartbeat, Discovery
+from utils import State, Heartbeat, Discovery, AMRClient, register_a_m_r_routes
 
 # Logging ayarları
 logging.basicConfig(level=logging.INFO)
@@ -27,6 +28,7 @@ state = None
 heartbeat = None
 discovery = None
 my_addr = None
+a_m_r = None  # Attack Mode Request P2P client
 
 
 def get_cpu_load():
@@ -119,7 +121,7 @@ def ping():
 
 def initialize(port, main_server, cpu_threshold=70.0):
     """Node'u başlat ve arka plan görevlerini tetikle."""
-    global state, heartbeat, discovery, my_addr
+    global state, heartbeat, discovery, my_addr, a_m_r
     
     # Konfigürasyonu ayarla
     hostname = socket.gethostname()
@@ -133,6 +135,11 @@ def initialize(port, main_server, cpu_threshold=70.0):
     state = State(cpu_threshold=cpu_threshold)
     heartbeat = Heartbeat(main_server, my_addr, interval=5)
     discovery = Discovery(state, main_server, my_addr, interval=10)
+    
+    # A_M_R (Attack Mode Request) P2P client'ı oluştur
+    a_m_r = AMRClient(my_addr, known_peers=[])
+    register_a_m_r_routes(app, a_m_r)
+    logger.info("✓ A_M_R (P2P fallback) kuruldu")
     
     # Arka plan görevlerini başlat
     heartbeat.start()
